@@ -2,8 +2,6 @@
 #
 # Install everything!
 
-trap 'ret=$?; test $ret -ne 0 && fail "$output"; exit $ret' EXIT
-
 set -e
 
 echo ''
@@ -26,21 +24,16 @@ fail () {
   exit
 }
 
-execute() {
-  output=$($1 2>&1)
-}
-
 install_homebrew () {
-  which -s brew
-  if [ $? != 0 ]
+  if [[ `which -s brew` != 0 ]]
   then
     info 'installing homebrew'
-    execute 'ruby <(curl -fsS https://raw.github.com/mxcl/homebrew/go)'
-    execute 'brew update'
+    ruby <(curl -fsS https://raw.github.com/mxcl/homebrew/go)
+    brew update
     success 'homebrew installed'
   else
     info 'updating homebrew'
-    execute 'brew update'
+    brew update
     success 'homebrew updated'
   fi
 }
