@@ -2,43 +2,48 @@
 #
 # Install everything!
 
+trap 'ret=$?; test $ret -ne 0 && printf "failed\n\n" >&2; exit $ret' EXIT
+
 set -e
 
-echo ''
-
-info () {
-  printf "  [ \033[00;34m..\033[0m ] $1"
+fancy_echo() {
+  echo "\n$1"
 }
 
-user () {
-  printf "\r  [ \033[0;33m?\033[0m ] $1 "
-}
+fancy_echo "Installing Homebrew ..."
+  ruby <(curl -fsS https://raw.github.com/mxcl/homebrew/go)
+  brew update
 
-success () {
-  printf "\r\033[2K  [ \033[00;32mOK\033[0m ] $1\n"
-}
+fancy_echo "Installing git ..."
+  brew install git
+  brew install git-flow
 
-fail () {
-  printf "\r\033[2K  [\033[0;31mFAIL\033[0m] $1\n$2"
-  echo ''
-  exit
-}
+fancy_echo "Installing Postgres ..."
+  brew install postgres --no-python
+  initdb /usr/local/var/postgres -E utf8
 
-install_homebrew () {
-  if [[ `which -s brew` != 0 ]]
-  then
-    info 'installing homebrew'
-    ruby <(curl -fsS https://raw.github.com/mxcl/homebrew/go)
-    brew update
-    success 'homebrew installed'
-  else
-    info 'updating homebrew'
-    brew update
-    success 'homebrew updated'
-  fi
-}
+fancy_echo "Installing Redis ..."
+  brew install redis
 
-install_homebrew
+fancy_echo "Installing vim ..."
+  brew install vim
 
-echo ''
-echo 'All installed!'
+fancy_echo "Installing ImageMagick ..."
+  brew install imagemagick
+
+fancy_echo "Installing QT ..."
+  brew install qt
+
+fancy_echo "Installing GNU Compiler Collection ..."
+  brew tap homebrew/dupes
+  brew install apple-gcc42
+
+fancy_echo "Upgrading and linking OpenSSL ..."
+  brew install openssl
+
+fancy_echo "Installing rvm ..."
+  curl -L https://get.rvm.io | bash
+
+fancy_echo "Installing lates Ruby 2.0.0 ..."
+  rvm install 2.0.0
+  rvm --default use 2.0.0
