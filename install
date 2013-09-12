@@ -20,10 +20,14 @@ fancy_echo "Installing git ..."
 
 fancy_echo "Installing Postgres ..."
   brew install postgres --no-python
+  ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
+  launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
   initdb /usr/local/var/postgres -E utf8
 
 fancy_echo "Installing Redis ..."
   brew install redis
+  ln -sfv /usr/local/opt/redis/*.plist ~/Library/LaunchAgents
+  launchctl load ~/Library/LaunchAgents/homebrew.mxcl.redis.plist
 
 fancy_echo "Installing vim ..."
   brew install vim
@@ -44,6 +48,6 @@ fancy_echo "Upgrading and linking OpenSSL ..."
 fancy_echo "Installing rvm ..."
   curl -L https://get.rvm.io | bash
 
-fancy_echo "Installing lates Ruby 2.0.0 ..."
+fancy_echo "Installing latest Ruby 2.0.0 ..."
   rvm install 2.0.0
   rvm --default use 2.0.0
