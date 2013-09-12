@@ -24,6 +24,11 @@ fancy_echo "Installing Postgres ..."
   launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
   initdb /usr/local/var/postgres -E utf8
 
+fancy_echo "Installing MySQL ..."
+   brew install mysql
+   ln -sfv /usr/local/opt/mysql/*.plist ~/Library/LaunchAgents
+   launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
+
 fancy_echo "Installing Redis ..."
   brew install redis
   ln -sfv /usr/local/opt/redis/*.plist ~/Library/LaunchAgents
