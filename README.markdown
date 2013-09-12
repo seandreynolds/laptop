@@ -2,6 +2,10 @@
 
 ## install
 
+1) Install Xcode (and Command Line Tools)
+
+2) Run this script:
+
 ```
 bash <(curl -s https://raw.github.com/benhanzl/laptop/master/install)
 ```
