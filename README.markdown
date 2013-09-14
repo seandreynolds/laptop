@@ -10,6 +10,18 @@
 bash <(curl -s https://raw.github.com/benhanzl/laptop/master/install)
 ```
 
+## additional software
+
+- 1Password
+- Airmail
+- Cloud
+- Google Chrome
+- Kindle
+- Marked
+- Pixelmator
+- Sublime Text 2
+- Tweetbot
+
 ## thanks
 
 The idea for this came from [thoughtbot](http://robots.thoughtbot.com/)'s
