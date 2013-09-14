@@ -52,6 +52,7 @@ fancy_echo "Upgrading and linking OpenSSL ..."
 
 fancy_echo "Installing rvm ..."
   curl -L https://get.rvm.io | bash
+  source ~/.bash_profile
 
 fancy_echo "Installing latest Ruby 2.0.0 ..."
   rvm install 2.0.0
