@@ -20,18 +20,39 @@ fancy_echo "Installing git ..."
 
 fancy_echo "Installing Postgres ..."
   brew install postgres --no-python
-  ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
+  if [[ -e ~/Library/LaunchAgents && ! -d ~/Library/LaunchAgents ]]; then
+    echo "~/Library/LaunchAgents already exists and is not directory, exiting"
+    exit 1
+  fi   
+  if [ ! -d ~/Library/LaunchAgents ]; then
+    mkdir ~/Library/LaunchAgents || { echo "~/Library/LaunchAgents directory does not exist and unable to create, exiting" ; exit 1; }
+  fi
+  ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents/
   launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
   initdb /usr/local/var/postgres -E utf8
 
 fancy_echo "Installing MySQL ..."
    brew install mysql
-   ln -sfv /usr/local/opt/mysql/*.plist ~/Library/LaunchAgents
+   if [[ -e ~/Library/LaunchAgents && ! -d ~/Library/LaunchAgents ]]; then
+    echo "~/Library/LaunchAgents already exists and is not directory, exiting"
+    exit 1
+   fi 
+   if [ ! -d ~/Library/LaunchAgents ]; then
+     mkdir ~/Library/LaunchAgents || { echo "~/Library/LaunchAgents directory does not exist and unable to create, exiting" ; exit 1; }
+   fi
+   ln -sfv /usr/local/opt/mysql/*.plist ~/Library/LaunchAgents/
    launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
 
 fancy_echo "Installing Redis ..."
   brew install redis
-  ln -sfv /usr/local/opt/redis/*.plist ~/Library/LaunchAgents
+  if [[ -e ~/Library/LaunchAgents && ! -d ~/Library/LaunchAgents ]]; then
+    echo "~/Library/LaunchAgents already exists and is not directory, exiting"
+    exit 1
+  fi
+  if [ ! -d ~/Library/LaunchAgents ]; then
+    mkdir ~/Library/LaunchAgents || { echo "~/Library/LaunchAgents directory does not exist and unable to create, exiting" ; exit 1; }
+  fi
+  ln -sfv /usr/local/opt/redis/*.plist ~/Library/LaunchAgents/
   launchctl load ~/Library/LaunchAgents/homebrew.mxcl.redis.plist
 
 fancy_echo "Installing vim ..."
